@@ -77,33 +77,15 @@ func RegisterEquipmentRoutes(r *gin.RouterGroup) {
 	}
 
 	// Equipment sub-resources
-	equipments.GET("/type", func(c *gin.Context) {
-		c.JSON(200, gin.H{"message": "Equipment types endpoint"})
-	})
-	equipments.GET("/bind", func(c *gin.Context) {
-		c.JSON(200, gin.H{"message": "Equipment binds endpoint"})
-	})
-	equipments.GET("/direction", func(c *gin.Context) {
-		c.JSON(200, gin.H{"message": "Equipment directions endpoint"})
-	})
-	equipments.GET("/entity", func(c *gin.Context) {
-		c.JSON(200, gin.H{"message": "Equipment entities endpoint"})
-	})
-	equipments.GET("/limit", func(c *gin.Context) {
-		c.JSON(200, gin.H{"message": "Equipment limits endpoint"})
-	})
-	equipments.GET("/alert", func(c *gin.Context) {
-		c.JSON(200, gin.H{"message": "Equipment alerts endpoint"})
-	})
-	equipments.GET("/attribute", func(c *gin.Context) {
-		c.JSON(200, gin.H{"message": "Equipment attributes endpoint"})
-	})
-	equipments.GET("/device", func(c *gin.Context) {
-		c.JSON(200, gin.H{"message": "Equipment devices endpoint"})
-	})
-	equipments.GET("/state", func(c *gin.Context) {
-		c.JSON(200, gin.H{"message": "Equipment states endpoint"})
-	})
+	equipments.GET("/type", equipmentController.Types)
+	equipments.GET("/bind", equipmentController.Binds)
+	equipments.GET("/direction", equipmentController.Directions)
+	equipments.GET("/entity", equipmentController.Entities)
+	equipments.GET("/limit", equipmentController.Limits)
+	equipments.GET("/alert", equipmentController.Alerts)
+	equipments.GET("/attribute", equipmentController.Attributes)
+	equipments.GET("/device", equipmentController.Devices)
+	equipments.GET("/state", equipmentController.States)
 }
 
 func RegisterFloorRoutes(r *gin.RouterGroup) {
