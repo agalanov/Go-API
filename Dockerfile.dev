@@ -1,0 +1,29 @@
+# Development Dockerfile with Go runtime
+FROM golang:1.21-alpine
+
+# Install build dependencies
+RUN apk add --no-cache git
+
+# Set working directory
+WORKDIR /app
+
+# Install swag for Swagger generation
+RUN go install github.com/swaggo/swag/cmd/swag@latest
+
+# Copy go mod files
+COPY go.mod ./
+COPY go.sum* ./
+RUN go mod download
+
+# Copy source code
+COPY . .
+
+# Generate Swagger docs
+RUN swag init -g main.go || true
+
+# Expose port
+EXPOSE 8080
+
+# Run the application with hot reload
+CMD ["go", "run", "main.go"]
+
