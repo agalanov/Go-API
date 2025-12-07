@@ -12,7 +12,7 @@ import (
 	"github.com/joho/godotenv"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
-	
+
 	_ "diflow/api/docs" // Swagger docs
 )
 
@@ -72,12 +72,6 @@ func main() {
 	r.Use(middleware.ErrorHandler())
 
 	// Health check endpoint
-	// @Summary Health check
-	// @Description Check if API is running
-	// @Tags health
-	// @Produce json
-	// @Success 200 {object} map[string]string
-	// @Router /health [get]
 	r.GET("/health", func(c *gin.Context) {
 		c.JSON(200, gin.H{"status": "ok"})
 	})
@@ -127,4 +121,3 @@ func main() {
 		log.Fatalf("Failed to start server: %v", err)
 	}
 }
-

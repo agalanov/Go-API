@@ -1,5 +1,7 @@
 package controllers
 
+// OAuth endpoints
+
 // @Summary      OAuth Login
 // @Description  Авторизация через OAuth
 // @Tags         oauth
@@ -10,6 +12,7 @@ package controllers
 // @Failure      400          {object}  map[string]string
 // @Failure      401          {object}  map[string]string
 // @Router       /oauth/login [post]
+func _() {}
 
 // @Summary      OAuth Register
 // @Description  Регистрация нового пользователя
@@ -20,6 +23,7 @@ package controllers
 // @Success      201   {object}  map[string]interface{}
 // @Failure      400   {object}  map[string]string
 // @Router       /oauth/register [post]
+func _() {}
 
 // @Summary      Refresh Token
 // @Description  Обновить access token используя refresh token
@@ -31,6 +35,7 @@ package controllers
 // @Failure      400      {object}  map[string]string
 // @Failure      401      {object}  map[string]string
 // @Router       /oauth/refresh [post]
+func _() {}
 
 // @Summary      Logout
 // @Description  Выход из системы
@@ -41,6 +46,7 @@ package controllers
 // @Success      200  {object}  map[string]string
 // @Failure      401  {object}  map[string]string
 // @Router       /oauth/logout [get]
+func _() {}
 
 // @Summary      Get Access Info
 // @Description  Получить информацию о текущем пользователе
@@ -51,6 +57,7 @@ package controllers
 // @Success      200  {object}  map[string]interface{}
 // @Failure      401  {object}  map[string]string
 // @Router       /oauth/access [get]
+func _() {}
 
 // @Summary      Get JWT Token
 // @Description  Получить JWT токен
@@ -63,5 +70,4 @@ package controllers
 // @Failure      401          {object}  map[string]string
 // @Router       /oauth/jwt [post]
 // @Router       /oauth/jwt [get]
-func init() {}
-
+func _() {}

@@ -1,31 +1,35 @@
 package controllers
 
+// SSO endpoints
+
 // @Summary      SSO Login
 // @Description  Авторизация через SSO
 // @Tags         sso
 // @Accept       json
 // @Produce      json
-// @Param        credentials  body      LoginRequest   true  "Credentials"
+// @Param        credentials  body      LoginRequest  true  "Credentials"
 // @Success      200          {object}  LoginResponse
 // @Failure      400          {object}  map[string]string
 // @Failure      401          {object}  map[string]string
 // @Router       /sso/login [post]
 // @Router       /sso/login [get]
+func _() {}
 
-// @Summary      Get JWT Token
-// @Description  Получить JWT токен
+// @Summary      SSO JWT
+// @Description  Получить JWT токен через SSO
 // @Tags         sso
 // @Accept       json
 // @Produce      json
-// @Param        credentials  body      LoginRequest   true  "Credentials"
+// @Param        credentials  body      LoginRequest  true  "Credentials"
 // @Success      200          {object}  map[string]string
 // @Failure      400          {object}  map[string]string
 // @Failure      401          {object}  map[string]string
 // @Router       /sso/jwt [post]
 // @Router       /sso/jwt [get]
+func _() {}
 
-// @Summary      Generate Query Param Token
-// @Description  Сгенерировать токен для query параметра
+// @Summary      SSO Query Param
+// @Description  Авторизация через SSO с параметрами запроса
 // @Tags         sso
 // @Security     BearerAuth
 // @Produce      json
@@ -33,17 +37,17 @@ package controllers
 // @Failure      401  {object}  map[string]string
 // @Router       /sso/qp [post]
 // @Router       /sso/qp [get]
+func _() {}
 
-// @Summary      OAuth Login
-// @Description  Авторизация через OAuth
+// @Summary      SSO OAuth
+// @Description  Авторизация через OAuth (SSO)
 // @Tags         sso
 // @Accept       json
 // @Produce      json
-// @Param        credentials  body      LoginRequest   true  "Credentials"
+// @Param        credentials  body      LoginRequest  true  "Credentials"
 // @Success      200          {object}  LoginResponse
 // @Failure      400          {object}  map[string]string
 // @Failure      401          {object}  map[string]string
 // @Router       /sso/oauth [post]
 // @Router       /sso/oauth [get]
-func init() {}
-
+func _() {}

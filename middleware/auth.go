@@ -9,7 +9,6 @@ import (
 	"diflow/api/utils"
 
 	"github.com/gin-gonic/gin"
-	"github.com/golang-jwt/jwt/v5"
 )
 
 func AuthMiddleware() gin.HandlerFunc {
@@ -36,17 +35,15 @@ func AuthMiddleware() gin.HandlerFunc {
 			// Validate JWT token
 			jwtToken, err := utils.ValidateJWT(tokenString)
 			if err == nil && jwtToken.Valid {
-				if claims, ok := jwtToken.Claims.(jwt.MapClaims); ok {
-					if userIDFloat, ok := claims["user_id"].(float64); ok {
-						userID := uint(userIDFloat)
+				if claims, ok := jwtToken.Claims.(*utils.Claims); ok {
+					userID := claims.UserID
 
-						var user models.User
-						if err := database.DB.First(&user, userID).Error; err == nil {
-							c.Set("user", &user)
-							c.Set("user_id", userID)
-							c.Next()
-							return
-						}
+					var user models.User
+					if err := database.DB.First(&user, userID).Error; err == nil {
+						c.Set("user", &user)
+						c.Set("user_id", userID)
+						c.Next()
+						return
 					}
 				}
 			}
@@ -68,4 +65,3 @@ func AuthMiddleware() gin.HandlerFunc {
 		c.Abort()
 	}
 }
-

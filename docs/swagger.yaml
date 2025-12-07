@@ -18,6 +18,367 @@ definitions:
         type: string
       user: {}
     type: object
+  controllers.RefreshTokenRequest:
+    properties:
+      refresh_token:
+        type: string
+    required:
+    - refresh_token
+    type: object
+  controllers.RegisterRequest:
+    properties:
+      email:
+        type: string
+      name:
+        type: string
+      password:
+        type: string
+      username:
+        type: string
+    required:
+    - email
+    - password
+    - username
+    type: object
+  models.Building:
+    properties:
+      address:
+        type: string
+      created:
+        type: string
+      customer:
+        allOf:
+        - $ref: '#/definitions/models.Customer'
+        description: Relations
+      customer_id:
+        type: integer
+      description:
+        type: string
+      equipments:
+        items:
+          $ref: '#/definitions/models.Equipment'
+        type: array
+      ext_id:
+        type: string
+      floors:
+        items:
+          $ref: '#/definitions/models.Floor'
+        type: array
+      id:
+        type: integer
+      latitude:
+        type: number
+      longitude:
+        type: number
+      modified:
+        type: string
+      project_sections:
+        items:
+          $ref: '#/definitions/models.ProjectSection'
+        type: array
+    type: object
+  models.Customer:
+    properties:
+      buildings:
+        description: Relations
+        items:
+          $ref: '#/definitions/models.Building'
+        type: array
+      created_at:
+        type: string
+      description:
+        type: string
+      email:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      phone:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  models.Equipment:
+    properties:
+      binds:
+        items:
+          $ref: '#/definitions/models.EquipmentBind'
+        type: array
+      building:
+        $ref: '#/definitions/models.Building'
+      building_id:
+        type: integer
+      commissioning_date:
+        type: string
+      cost:
+        type: number
+      created:
+        type: string
+      description:
+        type: string
+      devices:
+        items:
+          $ref: '#/definitions/models.EquipmentDevice'
+        type: array
+      enabled:
+        type: boolean
+      entity:
+        allOf:
+        - $ref: '#/definitions/models.EquipmentEntity'
+        description: Relations
+      entity_id:
+        type: integer
+      ext_id:
+        type: string
+      floor:
+        $ref: '#/definitions/models.Floor'
+      floor_id:
+        type: integer
+      id:
+        type: integer
+      limits:
+        items:
+          $ref: '#/definitions/models.EquipmentLimit'
+        type: array
+      modified:
+        type: string
+      position_x:
+        type: number
+      position_y:
+        type: number
+      position_z:
+        type: number
+      production_date:
+        type: string
+      zone:
+        $ref: '#/definitions/models.Zone'
+      zone_id:
+        type: integer
+    type: object
+  models.EquipmentBind:
+    properties:
+      bind_id:
+        type: integer
+      created_at:
+        type: string
+      equipment_id:
+        type: integer
+      id:
+        type: integer
+      updated_at:
+        type: string
+    type: object
+  models.EquipmentDevice:
+    properties:
+      created_at:
+        type: string
+      description:
+        type: string
+      equipment:
+        allOf:
+        - $ref: '#/definitions/models.Equipment'
+        description: Relations
+      equipment_id:
+        type: integer
+      host_id:
+        type: integer
+      id:
+        type: integer
+      name:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  models.EquipmentEntity:
+    properties:
+      created_at:
+        type: string
+      description:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      section:
+        $ref: '#/definitions/models.ProjectSection'
+      section_id:
+        type: integer
+      type:
+        allOf:
+        - $ref: '#/definitions/models.EquipmentType'
+        description: Relations
+      type_id:
+        type: integer
+      updated_at:
+        type: string
+    type: object
+  models.EquipmentLimit:
+    properties:
+      created_at:
+        type: string
+      equipment_id:
+        type: integer
+      id:
+        type: integer
+      max_value:
+        type: number
+      min_value:
+        type: number
+      updated_at:
+        type: string
+    type: object
+  models.EquipmentType:
+    properties:
+      created_at:
+        type: string
+      description:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  models.File:
+    properties:
+      created_at:
+        type: string
+      entity_id:
+        type: integer
+      entity_type:
+        type: integer
+      id:
+        type: integer
+      mime_type:
+        type: string
+      name:
+        type: string
+      path:
+        type: string
+      size:
+        type: integer
+      updated_at:
+        type: string
+    type: object
+  models.Floor:
+    properties:
+      building:
+        allOf:
+        - $ref: '#/definitions/models.Building'
+        description: Relations
+      building_id:
+        type: integer
+      created_at:
+        type: string
+      description:
+        type: string
+      equipments:
+        items:
+          $ref: '#/definitions/models.Equipment'
+        type: array
+      id:
+        type: integer
+      level:
+        type: integer
+      name:
+        type: string
+      updated_at:
+        type: string
+      zones:
+        items:
+          $ref: '#/definitions/models.Zone'
+        type: array
+    type: object
+  models.OPCDatatype:
+    properties:
+      created_at:
+        type: string
+      description:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  models.OPCServer:
+    properties:
+      created_at:
+        type: string
+      description:
+        type: string
+      host:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      port:
+        type: integer
+      updated_at:
+        type: string
+    type: object
+  models.OPCTag:
+    properties:
+      created_at:
+        type: string
+      data_type:
+        $ref: '#/definitions/models.OPCDatatype'
+      data_type_id:
+        type: integer
+      description:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      path:
+        type: string
+      server:
+        allOf:
+        - $ref: '#/definitions/models.OPCServer'
+        description: Relations
+      server_id:
+        type: integer
+      updated_at:
+        type: string
+    type: object
+  models.ProjectSection:
+    properties:
+      buildings:
+        description: Relations
+        items:
+          $ref: '#/definitions/models.Building'
+        type: array
+      created_at:
+        type: string
+      description:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  models.Setting:
+    properties:
+      created_at:
+        type: string
+      description:
+        type: string
+      id:
+        type: integer
+      key:
+        type: string
+      updated_at:
+        type: string
+      value:
+        type: string
+    type: object
   models.User:
     properties:
       comment:
@@ -45,6 +406,33 @@ definitions:
       username:
         type: string
     type: object
+  models.Zone:
+    properties:
+      building:
+        $ref: '#/definitions/models.Building'
+      building_id:
+        type: integer
+      created_at:
+        type: string
+      description:
+        type: string
+      equipments:
+        items:
+          $ref: '#/definitions/models.Equipment'
+        type: array
+      floor:
+        allOf:
+        - $ref: '#/definitions/models.Floor'
+        description: Relations
+      floor_id:
+        type: integer
+      id:
+        type: integer
+      name:
+        type: string
+      updated_at:
+        type: string
+    type: object
 host: localhost:8080
 info:
   contact:
@@ -58,6 +446,65 @@ info:
   title: Diflow API
   version: "1.0"
 paths:
+  /building:
+    get:
+      description: Получить список зданий
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 'items: array of Building'
+          schema:
+            additionalProperties: true
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: List Buildings
+      tags:
+      - building
+    post:
+      consumes:
+      - application/json
+      description: Создать новое здание
+      parameters:
+      - description: Building data
+        in: body
+        name: building
+        required: true
+        schema:
+          $ref: '#/definitions/models.Building'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.Building'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: Create Building
+      tags:
+      - building
   /building/{id}:
     delete:
       description: Удалить здание (soft delete)
@@ -94,6 +541,580 @@ paths:
       summary: Delete Building
       tags:
       - building
+    get:
+      description: Получить здание по ID
+      parameters:
+      - description: Building ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Building'
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: Get Building
+      tags:
+      - building
+    patch:
+      consumes:
+      - application/json
+      description: Обновить здание
+      parameters:
+      - description: Building ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Building data
+        in: body
+        name: building
+        required: true
+        schema:
+          $ref: '#/definitions/models.Building'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Building'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: Update Building
+      tags:
+      - building
+    put:
+      consumes:
+      - application/json
+      description: Обновить здание
+      parameters:
+      - description: Building ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Building data
+        in: body
+        name: building
+        required: true
+        schema:
+          $ref: '#/definitions/models.Building'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Building'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: Update Building
+      tags:
+      - building
+  /building/{id}/project-section:
+    get:
+      description: Получить список секций проекта для здания
+      parameters:
+      - description: Building ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 'items: array of ProjectSection'
+          schema:
+            additionalProperties: true
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: List Building Project Sections
+      tags:
+      - building
+    post:
+      consumes:
+      - application/json
+      description: Создать новую секцию проекта для здания
+      parameters:
+      - description: Building ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Project Section data
+        in: body
+        name: section
+        required: true
+        schema:
+          $ref: '#/definitions/models.ProjectSection'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.ProjectSection'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: Create Building Project Section
+      tags:
+      - building
+  /building/{id}/project-section/{section_id}:
+    delete:
+      description: Удалить секцию проекта здания
+      parameters:
+      - description: Building ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Project Section ID
+        in: path
+        name: section_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: boolean
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: Delete Building Project Section
+      tags:
+      - building
+    get:
+      description: Получить секцию проекта здания по ID
+      parameters:
+      - description: Building ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Project Section ID
+        in: path
+        name: section_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ProjectSection'
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: Get Building Project Section
+      tags:
+      - building
+    put:
+      consumes:
+      - application/json
+      description: Обновить секцию проекта здания
+      parameters:
+      - description: Building ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Project Section ID
+        in: path
+        name: section_id
+        required: true
+        type: integer
+      - description: Project Section data
+        in: body
+        name: section
+        required: true
+        schema:
+          $ref: '#/definitions/models.ProjectSection'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ProjectSection'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: Update Building Project Section
+      tags:
+      - building
+  /customer:
+    get:
+      description: Получить список клиентов
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 'items: array of Customer'
+          schema:
+            additionalProperties: true
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: List Customers
+      tags:
+      - customer
+    post:
+      consumes:
+      - application/json
+      description: Создать нового клиента
+      parameters:
+      - description: Customer data
+        in: body
+        name: customer
+        required: true
+        schema:
+          $ref: '#/definitions/models.Customer'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.Customer'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: Create Customer
+      tags:
+      - customer
+  /customer/{id}:
+    get:
+      description: Получить клиента по ID
+      parameters:
+      - description: Customer ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Customer'
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: Get Customer
+      tags:
+      - customer
+    patch:
+      consumes:
+      - application/json
+      description: Обновить клиента
+      parameters:
+      - description: Customer ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Customer data
+        in: body
+        name: customer
+        required: true
+        schema:
+          $ref: '#/definitions/models.Customer'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Customer'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: Update Customer
+      tags:
+      - customer
+    put:
+      consumes:
+      - application/json
+      description: Обновить клиента
+      parameters:
+      - description: Customer ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Customer data
+        in: body
+        name: customer
+        required: true
+        schema:
+          $ref: '#/definitions/models.Customer'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Customer'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: Update Customer
+      tags:
+      - customer
+  /equipment:
+    get:
+      description: Получить список оборудования
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 'items: array of Equipment'
+          schema:
+            additionalProperties: true
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: List Equipment
+      tags:
+      - equipment
+    post:
+      consumes:
+      - application/json
+      description: Создать новое оборудование
+      parameters:
+      - description: Equipment data
+        in: body
+        name: equipment
+        required: true
+        schema:
+          $ref: '#/definitions/models.Equipment'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.Equipment'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: Create Equipment
+      tags:
+      - equipment
   /equipment/{id}:
     delete:
       description: Удалить оборудование
@@ -130,6 +1151,840 @@ paths:
       summary: Delete Equipment
       tags:
       - equipment
+    get:
+      description: Получить оборудование по ID
+      parameters:
+      - description: Equipment ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Equipment'
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: Get Equipment
+      tags:
+      - equipment
+    patch:
+      consumes:
+      - application/json
+      description: Обновить оборудование
+      parameters:
+      - description: Equipment ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Equipment data
+        in: body
+        name: equipment
+        required: true
+        schema:
+          $ref: '#/definitions/models.Equipment'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Equipment'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: Update Equipment
+      tags:
+      - equipment
+    put:
+      consumes:
+      - application/json
+      description: Обновить оборудование
+      parameters:
+      - description: Equipment ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Equipment data
+        in: body
+        name: equipment
+        required: true
+        schema:
+          $ref: '#/definitions/models.Equipment'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Equipment'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: Update Equipment
+      tags:
+      - equipment
+  /equipment/alert:
+    get:
+      description: Получить список оповещений оборудования
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: List Equipment Alerts
+      tags:
+      - equipment
+  /equipment/attribute:
+    get:
+      description: Получить список атрибутов оборудования
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: List Equipment Attributes
+      tags:
+      - equipment
+  /equipment/bind:
+    get:
+      description: Получить список привязок оборудования
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: List Equipment Binds
+      tags:
+      - equipment
+  /equipment/device:
+    get:
+      description: Получить список устройств оборудования
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: List Equipment Devices
+      tags:
+      - equipment
+  /equipment/direction:
+    get:
+      description: Получить список направлений оборудования
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: List Equipment Directions
+      tags:
+      - equipment
+  /equipment/entity:
+    get:
+      description: Получить список сущностей оборудования
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: List Equipment Entities
+      tags:
+      - equipment
+  /equipment/limit:
+    get:
+      description: Получить список лимитов оборудования
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: List Equipment Limits
+      tags:
+      - equipment
+  /equipment/state:
+    get:
+      description: Получить список состояний оборудования
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: List Equipment States
+      tags:
+      - equipment
+  /equipment/type:
+    get:
+      description: Получить список типов оборудования
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: List Equipment Types
+      tags:
+      - equipment
+  /file:
+    get:
+      description: Получить список файлов
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 'items: array of File'
+          schema:
+            additionalProperties: true
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: List Files
+      tags:
+      - file
+    post:
+      consumes:
+      - multipart/form-data
+      description: Загрузить новый файл
+      parameters:
+      - description: File to upload
+        in: formData
+        name: file
+        required: true
+        type: file
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.File'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: Upload File
+      tags:
+      - file
+  /file/{id}:
+    delete:
+      description: Удалить файл
+      parameters:
+      - description: File ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: boolean
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: Delete File
+      tags:
+      - file
+    get:
+      description: Получить файл по ID
+      parameters:
+      - description: File ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.File'
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: Get File
+      tags:
+      - file
+  /file/pysvc:
+    post:
+      consumes:
+      - application/json
+      description: Обработка файла через Python сервис
+      parameters:
+      - description: Pysvc data
+        in: body
+        name: data
+        required: true
+        schema:
+          additionalProperties: true
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: File Pysvc
+      tags:
+      - file
+  /file/table:
+    post:
+      consumes:
+      - application/json
+      description: Обработка файла таблицы
+      parameters:
+      - description: Table data
+        in: body
+        name: data
+        required: true
+        schema:
+          additionalProperties: true
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: File Table
+      tags:
+      - file
+  /floor:
+    get:
+      description: Получить список этажей
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 'items: array of Floor'
+          schema:
+            additionalProperties: true
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: List Floors
+      tags:
+      - floor
+    post:
+      consumes:
+      - application/json
+      description: Создать новый этаж
+      parameters:
+      - description: Floor data
+        in: body
+        name: floor
+        required: true
+        schema:
+          $ref: '#/definitions/models.Floor'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.Floor'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: Create Floor
+      tags:
+      - floor
+  /floor/{id}:
+    delete:
+      description: Удалить этаж
+      parameters:
+      - description: Floor ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: boolean
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: Delete Floor
+      tags:
+      - floor
+    get:
+      description: Получить этаж по ID
+      parameters:
+      - description: Floor ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Floor'
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: Get Floor
+      tags:
+      - floor
+    patch:
+      consumes:
+      - application/json
+      description: Обновить этаж
+      parameters:
+      - description: Floor ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Floor data
+        in: body
+        name: floor
+        required: true
+        schema:
+          $ref: '#/definitions/models.Floor'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Floor'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: Update Floor
+      tags:
+      - floor
+    put:
+      consumes:
+      - application/json
+      description: Обновить этаж
+      parameters:
+      - description: Floor ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Floor data
+        in: body
+        name: floor
+        required: true
+        schema:
+          $ref: '#/definitions/models.Floor'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Floor'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: Update Floor
+      tags:
+      - floor
+  /floor/mode:
+    get:
+      description: Получить список режимов этажей
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: List Floor Modes
+      tags:
+      - floor
+  /health:
+    get:
+      description: Проверить состояние API
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Health Check
+      tags:
+      - health
+  /oauth/access:
+    get:
+      description: Получить информацию о текущем пользователе
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: Get Access Info
+      tags:
+      - oauth
   /oauth/jwt:
     get:
       consumes:
@@ -201,40 +2056,7 @@ paths:
       summary: Get JWT Token
       tags:
       - oauth
-  /sso/oauth:
-    get:
-      consumes:
-      - application/json
-      description: Авторизация через OAuth
-      parameters:
-      - description: Credentials
-        in: body
-        name: credentials
-        required: true
-        schema:
-          $ref: '#/definitions/controllers.LoginRequest'
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/controllers.LoginResponse'
-        "400":
-          description: Bad Request
-          schema:
-            additionalProperties:
-              type: string
-            type: object
-        "401":
-          description: Unauthorized
-          schema:
-            additionalProperties:
-              type: string
-            type: object
-      summary: OAuth Login
-      tags:
-      - sso
+  /oauth/login:
     post:
       consumes:
       - application/json
@@ -252,7 +2074,8 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/controllers.LoginResponse'
+            additionalProperties: true
+            type: object
         "400":
           description: Bad Request
           schema:
@@ -267,7 +2090,1278 @@ paths:
             type: object
       summary: OAuth Login
       tags:
+      - oauth
+  /oauth/logout:
+    get:
+      description: Выход из системы
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: Logout
+      tags:
+      - oauth
+  /oauth/refresh:
+    post:
+      consumes:
+      - application/json
+      description: Обновить access token используя refresh token
+      parameters:
+      - description: Refresh token request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/controllers.RefreshTokenRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Refresh Token
+      tags:
+      - oauth
+  /oauth/register:
+    post:
+      consumes:
+      - application/json
+      description: Регистрация нового пользователя
+      parameters:
+      - description: User data
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/controllers.RegisterRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: OAuth Register
+      tags:
+      - oauth
+  /opc/datatype:
+    get:
+      description: Получить список типов данных OPC
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 'items: array of OPCDatatype'
+          schema:
+            additionalProperties: true
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: List OPC Datatypes
+      tags:
+      - opc
+  /opc/datatype/{id}:
+    get:
+      description: Получить тип данных OPC по ID
+      parameters:
+      - description: OPC Datatype ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.OPCDatatype'
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: Get OPC Datatype
+      tags:
+      - opc
+  /opc/server:
+    get:
+      description: Получить список OPC серверов
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 'items: array of OPCServer'
+          schema:
+            additionalProperties: true
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: List OPC Servers
+      tags:
+      - opc
+  /opc/server/{id}:
+    get:
+      description: Получить OPC сервер по ID
+      parameters:
+      - description: OPC Server ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.OPCServer'
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: Get OPC Server
+      tags:
+      - opc
+  /opc/tag:
+    get:
+      description: Получить список OPC тегов
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 'items: array of OPCTag'
+          schema:
+            additionalProperties: true
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: List OPC Tags
+      tags:
+      - opc
+  /opc/tag/{id}:
+    get:
+      description: Получить OPC тег по ID
+      parameters:
+      - description: OPC Tag ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.OPCTag'
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: Get OPC Tag
+      tags:
+      - opc
+  /project-section:
+    get:
+      description: Получить список секций проекта
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 'items: array of ProjectSection'
+          schema:
+            additionalProperties: true
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: List Project Sections
+      tags:
+      - project-section
+    post:
+      consumes:
+      - application/json
+      description: Создать новую секцию проекта
+      parameters:
+      - description: Project Section data
+        in: body
+        name: section
+        required: true
+        schema:
+          $ref: '#/definitions/models.ProjectSection'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.ProjectSection'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: Create Project Section
+      tags:
+      - project-section
+  /project-section/{id}:
+    delete:
+      description: Удалить секцию проекта
+      parameters:
+      - description: Project Section ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: boolean
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: Delete Project Section
+      tags:
+      - project-section
+    get:
+      description: Получить секцию проекта по ID
+      parameters:
+      - description: Project Section ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ProjectSection'
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: Get Project Section
+      tags:
+      - project-section
+    patch:
+      consumes:
+      - application/json
+      description: Обновить секцию проекта
+      parameters:
+      - description: Project Section ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Project Section data
+        in: body
+        name: section
+        required: true
+        schema:
+          $ref: '#/definitions/models.ProjectSection'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ProjectSection'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: Update Project Section
+      tags:
+      - project-section
+    put:
+      consumes:
+      - application/json
+      description: Обновить секцию проекта
+      parameters:
+      - description: Project Section ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Project Section data
+        in: body
+        name: section
+        required: true
+        schema:
+          $ref: '#/definitions/models.ProjectSection'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ProjectSection'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: Update Project Section
+      tags:
+      - project-section
+  /setting:
+    get:
+      description: Получить список настроек
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 'items: array of Setting'
+          schema:
+            additionalProperties: true
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: List Settings
+      tags:
+      - setting
+    post:
+      consumes:
+      - application/json
+      description: Создать новую настройку
+      parameters:
+      - description: Setting data
+        in: body
+        name: setting
+        required: true
+        schema:
+          $ref: '#/definitions/models.Setting'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.Setting'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: Create Setting
+      tags:
+      - setting
+  /setting/{id}:
+    get:
+      description: Получить настройку по ID
+      parameters:
+      - description: Setting ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Setting'
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: Get Setting
+      tags:
+      - setting
+    patch:
+      consumes:
+      - application/json
+      description: Обновить настройку
+      parameters:
+      - description: Setting ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Setting data
+        in: body
+        name: setting
+        required: true
+        schema:
+          $ref: '#/definitions/models.Setting'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Setting'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: Update Setting
+      tags:
+      - setting
+    put:
+      consumes:
+      - application/json
+      description: Обновить настройку
+      parameters:
+      - description: Setting ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Setting data
+        in: body
+        name: setting
+        required: true
+        schema:
+          $ref: '#/definitions/models.Setting'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Setting'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: Update Setting
+      tags:
+      - setting
+  /sso/jwt:
+    get:
+      consumes:
+      - application/json
+      description: Получить JWT токен через SSO
+      parameters:
+      - description: Credentials
+        in: body
+        name: credentials
+        required: true
+        schema:
+          $ref: '#/definitions/controllers.LoginRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: SSO JWT
+      tags:
       - sso
+    post:
+      consumes:
+      - application/json
+      description: Получить JWT токен через SSO
+      parameters:
+      - description: Credentials
+        in: body
+        name: credentials
+        required: true
+        schema:
+          $ref: '#/definitions/controllers.LoginRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: SSO JWT
+      tags:
+      - sso
+  /sso/login:
+    get:
+      consumes:
+      - application/json
+      description: Авторизация через SSO
+      parameters:
+      - description: Credentials
+        in: body
+        name: credentials
+        required: true
+        schema:
+          $ref: '#/definitions/controllers.LoginRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/controllers.LoginResponse'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: SSO Login
+      tags:
+      - sso
+    post:
+      consumes:
+      - application/json
+      description: Авторизация через SSO
+      parameters:
+      - description: Credentials
+        in: body
+        name: credentials
+        required: true
+        schema:
+          $ref: '#/definitions/controllers.LoginRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/controllers.LoginResponse'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: SSO Login
+      tags:
+      - sso
+  /sso/oauth:
+    get:
+      consumes:
+      - application/json
+      description: Авторизация через OAuth (SSO)
+      parameters:
+      - description: Credentials
+        in: body
+        name: credentials
+        required: true
+        schema:
+          $ref: '#/definitions/controllers.LoginRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/controllers.LoginResponse'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: SSO OAuth
+      tags:
+      - sso
+    post:
+      consumes:
+      - application/json
+      description: Авторизация через OAuth (SSO)
+      parameters:
+      - description: Credentials
+        in: body
+        name: credentials
+        required: true
+        schema:
+          $ref: '#/definitions/controllers.LoginRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/controllers.LoginResponse'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: SSO OAuth
+      tags:
+      - sso
+  /sso/qp:
+    get:
+      description: Авторизация через SSO с параметрами запроса
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: SSO Query Param
+      tags:
+      - sso
+    post:
+      description: Авторизация через SSO с параметрами запроса
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: SSO Query Param
+      tags:
+      - sso
+  /stat/{id}/graph:
+    get:
+      description: Получить статистику в виде графика по ID
+      parameters:
+      - description: Stat ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: Get Statistics Graph by ID
+      tags:
+      - stat
+  /stat/{id}/table:
+    get:
+      description: Получить статистику в виде таблицы по ID
+      parameters:
+      - description: Stat ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: Get Statistics Table by ID
+      tags:
+      - stat
+  /stat/graph:
+    get:
+      description: Получить статистику в виде графика
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: Get Statistics Graph
+      tags:
+      - stat
+  /stat/groups:
+    get:
+      description: Получить группы статистики
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: Get Statistics Groups
+      tags:
+      - stat
+  /stat/table:
+    get:
+      description: Получить статистику в виде таблицы
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: Get Statistics Table
+      tags:
+      - stat
+  /svg/equipment/alerts:
+    get:
+      description: Получить оповещения оборудования для SVG
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: Get SVG Equipment Alerts
+      tags:
+      - svg
+  /svg/equipment/batch-edit:
+    patch:
+      consumes:
+      - application/json
+      description: Массовое редактирование оборудования SVG
+      parameters:
+      - description: Batch edit data
+        in: body
+        name: data
+        required: true
+        schema:
+          additionalProperties: true
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: Batch Edit SVG Equipment
+      tags:
+      - svg
+  /svg/equipment/bind/batch-edit:
+    patch:
+      consumes:
+      - application/json
+      description: Массовое редактирование привязок оборудования SVG
+      parameters:
+      - description: Batch edit data
+        in: body
+        name: data
+        required: true
+        schema:
+          additionalProperties: true
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: Batch Edit SVG Equipment Binds
+      tags:
+      - svg
+  /svg/equipment/binds:
+    get:
+      description: Получить привязки оборудования для SVG
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: Get SVG Equipment Binds
+      tags:
+      - svg
+  /svg/equipment/binds-batch:
+    post:
+      consumes:
+      - application/json
+      description: Массовое создание привязок оборудования SVG
+      parameters:
+      - description: Batch create data
+        in: body
+        name: data
+        required: true
+        schema:
+          additionalProperties: true
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: Batch Create SVG Equipment Binds
+      tags:
+      - svg
+  /svg/equipment/entity/batch:
+    post:
+      consumes:
+      - application/json
+      description: Массовое создание сущностей оборудования SVG
+      parameters:
+      - description: Batch create data
+        in: body
+        name: data
+        required: true
+        schema:
+          additionalProperties: true
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: Batch Create SVG Equipment Entities
+      tags:
+      - svg
+  /svg/equipment/tags:
+    get:
+      description: Получить теги оборудования для SVG
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: Get SVG Equipment Tags
+      tags:
+      - svg
   /user/{id}:
     get:
       description: Получить пользователя по username
@@ -302,6 +3396,342 @@ paths:
       summary: Get User
       tags:
       - user
+  /zone:
+    get:
+      description: Получить список зон
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 'items: array of Zone'
+          schema:
+            additionalProperties: true
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: List Zones
+      tags:
+      - zone
+    post:
+      consumes:
+      - application/json
+      description: Создать новую зону
+      parameters:
+      - description: Zone data
+        in: body
+        name: zone
+        required: true
+        schema:
+          $ref: '#/definitions/models.Zone'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.Zone'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: Create Zone
+      tags:
+      - zone
+  /zone-groups:
+    get:
+      description: Получить список групп зон
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: List Zone Groups
+      tags:
+      - zone
+    post:
+      consumes:
+      - application/json
+      description: Создать новую группу зон
+      parameters:
+      - description: Zone Group data
+        in: body
+        name: group
+        required: true
+        schema:
+          additionalProperties: true
+          type: object
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: Create Zone Group
+      tags:
+      - zone
+  /zone-groups/{id}:
+    get:
+      description: Получить группу зон по ID
+      parameters:
+      - description: Zone Group ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: Get Zone Group
+      tags:
+      - zone
+    put:
+      consumes:
+      - application/json
+      description: Обновить группу зон
+      parameters:
+      - description: Zone Group ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Zone Group data
+        in: body
+        name: group
+        required: true
+        schema:
+          additionalProperties: true
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: Update Zone Group
+      tags:
+      - zone
+  /zone/{id}:
+    get:
+      description: Получить зону по ID
+      parameters:
+      - description: Zone ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Zone'
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: Get Zone
+      tags:
+      - zone
+    patch:
+      consumes:
+      - application/json
+      description: Обновить зону
+      parameters:
+      - description: Zone ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Zone data
+        in: body
+        name: zone
+        required: true
+        schema:
+          $ref: '#/definitions/models.Zone'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Zone'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: Update Zone
+      tags:
+      - zone
+    put:
+      consumes:
+      - application/json
+      description: Обновить зону
+      parameters:
+      - description: Zone ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Zone data
+        in: body
+        name: zone
+        required: true
+        schema:
+          $ref: '#/definitions/models.Zone'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Zone'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      - QueryAuth: []
+      summary: Update Zone
+      tags:
+      - zone
 securityDefinitions:
   BearerAuth:
     description: Type "Bearer" followed by a space and JWT token.

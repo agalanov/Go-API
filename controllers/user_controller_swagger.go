@@ -1,5 +1,7 @@
 package controllers
 
+// User endpoints
+
 // @Summary      Get User
 // @Description  Получить пользователя по username
 // @Tags         user
@@ -11,5 +13,4 @@ package controllers
 // @Failure      401  {object}  map[string]string
 // @Failure      404  {object}  map[string]string
 // @Router       /user/{id} [get]
-func init() {}
-
+func _() {}
